@@ -10,8 +10,6 @@ class MyModel extends Croquet.Model {
         this.data = {
             counter: 0
         };
-        console.log(options)
-        this.$test = options.test
         this.future(1000).tick();
     }
 
@@ -42,7 +40,6 @@ Croquet.Session.join({
     }
 }).then(({ id, model, view, step, leave }) => {
     console.log("COUNTER AFTER JOIN = " + model.data.counter)
-    setInterval(step, 100);
     view.subscribe("counter", "update", () => {
         console.log(model.data.counter)
     });

@@ -12,24 +12,24 @@ export class CroquetAdapterView extends Croquet.View {
         this.model = model
         this.socket = socket
 
+        // Notify Ready
+        onReady()
+
         // Listen for events redirect from Model
         this.subscribe(CroquetAdapterConfig.redirectEventsScope, CroquetAdapterConfig.redirectEventsEvent, this.handleEvent)
 
         // List for future events
         this.subscribe('future', 'command', this.handleFuture)
 
-        /*
-        this.subscribe('local-patch', 'applied', () => {
-            this.logger.log("Local Patch Applied received")
-        })
-        if (this.model.$prevFutures.length > 0) {
-            this.restore()
+        // Start future loop
+        this.future(10).checkFutures()
+    }
+
+    checkFutures() {
+        while (this.model.$futures.length > 0) {
+            this.handleFuture(this.model.$futures.shift())
         }
-        socket.on('completed-restore', () => {
-            console.log("COMPLETED")
-            onReady()
-        })
-        */
+        this.future(10).checkFutures()
     }
 
     /**

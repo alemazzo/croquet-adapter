@@ -7,6 +7,7 @@ const { applyOperation } = pkg;
 export class CroquetAdapterModel extends Croquet.Model {
 
     $logger = new Logger(this.constructor.name)
+    $futures = []
 
     init(options) {
 
@@ -47,12 +48,22 @@ export class CroquetAdapterModel extends Croquet.Model {
      * @param {*} id 
      * @param {*} time 
      */
-    sendFuture(id, time) {
-        this.$logger.log("SENDING FUTURE FOR ID = " + id)
-            //this.$prevFutures.push(id)
-        this.publish('future', 'command', id)
-        this.future(time).sendFuture(id, time)
+    sendFuture(id) {
+        this.$logger.log("PUSHING FUTURE FOR ID = " + id)
+        this.$futures.push(id)
     }
+
+    /**
+     * Apply local patches to the model data
+     * @param {*} patches 
+     */
+    applyLocalPatches(patches) {
+        patches.forEach(patch => {
+            this.data = applyOperation(this.data, patch).newDocument
+        });
+        this.$logger.log("Apply patches applied - Data = " + JSON.stringify(this.data))
+    }
+
 
     /*
     checkLocalPatches() {

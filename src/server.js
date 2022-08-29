@@ -5,7 +5,6 @@ import { ClientHandler } from './client-handler.js'
 export class CroquetServer {
 
     static start(port = 3000) {
-        //CroquetAdapterModel.register("CroquetAdapterModel")
         let server = new CroquetServer(port)
         server.run()
     }
