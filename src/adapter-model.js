@@ -6,22 +6,42 @@ const { applyOperation } = pkg;
 
 export class CroquetAdapterModel extends Croquet.Model {
 
+    /**
+     * The logger for the adapter model
+     */
     $logger = new Logger(this.constructor.name)
+
+    /**
+     * The queue of futures to be sent to the client by the view
+     */
     $futures = []
 
-    init(options) {
+    /**
+     * Check if the model has to be terminated
+     */
+    $terminate = false
 
-        // Setup
+    /**
+     * Check if the model is loaded in order to start consuming cpu
+     */
+    $loaded = false
+
+    init(options) {
         super.init(options)
+
+        // Setup data
         this.data = options.data
+        this.futures = options.futures
+        this.futureLoops = options.futureLoops
+
+        // Setup future loop
+        this.future(10).futureLoop()
 
         // Subscribe to events
         this.subscribe(CroquetAdapterConfig.eventsScope, CroquetAdapterConfig.eventsEvent, this.handleEvent)
 
         // Subscribe to patches
         this.subscribe(CroquetAdapterConfig.patchesScope, CroquetAdapterConfig.patchesEvent, this.handleRemotePatches);
-
-        //this.future(10).checkLocalPatches();
     }
 
     /**
@@ -43,12 +63,43 @@ export class CroquetAdapterModel extends Croquet.Model {
         this.$logger.log("Handle remote patches applied - Data = " + JSON.stringify(this.data))
     }
 
+    futureLoop() {
+        if (this.$terminate) {
+            this.destroy()
+            return
+        }
+        if (this.$loaded) {
+            this.consumeCPU(2)
+        }
+        this.futures.forEach(future => {
+            if (this.now() % future.time == 0) {
+                this.pushFutures(future.id, future.time)
+                this.futures.splice(this.futures.indexOf(future), 1)
+            }
+        })
+        this.futureLoops.forEach(future => {
+            if (this.now() % future.time == 0) {
+                this.pushFutures(future.id, future.time)
+            }
+        })
+        this.future(10).futureLoop()
+    }
+
+
+    consumeCPU(milliseconds = 1) {
+        // Consume cpu based on instructions without using Date.now
+        let start = performance.now()
+        while (performance.now() - start < milliseconds) {
+            let a = 1 + 1
+        }
+    }
+
     /**
-     * Notify the view that a future tick is arrived
+     * Push a future to the queue
      * @param {*} id 
      * @param {*} time 
      */
-    sendFuture(id) {
+    pushFutures(id) {
         this.$logger.log("PUSHING FUTURE FOR ID = " + id)
         this.$futures.push(id)
     }
@@ -64,29 +115,9 @@ export class CroquetAdapterModel extends Croquet.Model {
         this.$logger.log("Apply patches applied - Data = " + JSON.stringify(this.data))
     }
 
-
-    /*
-    checkLocalPatches() {
-        if (this.$patches != null && this.$patches.length > 0) {
-            this.$patches.forEach(patch => {
-                applyOperation(this.data, patch, true, true)
-            });
-            this.$patches = []
-            this.modelVersion += 1
-            this.publish('local-patch', 'applied')
-            this.$logger.log("Local patches applied - Data = " + JSON.stringify(this.data))
-        }
-        //this.future(10).checkLocalPatches();
+    terminate() {
+        this.$terminate = true
     }
 
-    addLocalPatches(patches) {
-        patches.forEach(patch => {
-            applyOperation(this.data, patch, true, true)
-        });
-        //this.$patches = this.$patches.concat(patches)
-        //this.publish('local-patch', 'applied')
-    }
-
-    */
 
 }

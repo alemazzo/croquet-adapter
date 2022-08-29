@@ -11,15 +11,17 @@ export class CroquetServer {
 
     constructor(port = 3000) {
         this.port = port
-        this.clients = []
+        this.handlers = []
     }
 
     run() {
+        CroquetAdapterModel.register("CroquetAdapterModel")
         this.server = new Server(this.port)
         this.server.on('connection', (socket) => {
-            this.clients.push(new ClientHandler(socket, () => {
-                this.clients.splice(this.clients.indexOf(socket), 1)
-            }))
+            let handler = new ClientHandler(socket, () => {
+                this.handlers.splice(this.handlers.indexOf(handler), 1)
+            })
+            this.handlers.push(handler)
         })
     }
 

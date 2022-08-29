@@ -3,6 +3,8 @@ import { CroquetAdapterModel } from "./adapter-model.js"
 import { CroquetAdapterView } from './adapter-view.js'
 import { Logger } from "./logger.js"
 
+var registered = false
+
 export class ClientHandler {
 
     logger = new Logger(this.constructor.name)
@@ -15,8 +17,8 @@ export class ClientHandler {
 
     setup() {
         this.socket
-            .on('join', (apiKey, appId, name, password, data, subscriptions, futures, futuresLoop) => {
-                this.onJoinMessage(apiKey, appId, name, password, data, subscriptions, futures, futuresLoop)
+            .on('join', (apiKey, appId, name, password, data, subscriptions, futures, futureLoops) => {
+                this.onJoinMessage(apiKey, appId, name, password, data, subscriptions, futures, futureLoops)
             }).on('subscribe', (scope, event) => {
                 this.onSubscribeMessage(scope, event)
             }).on('unsubscribe', (scope, event) => {
@@ -33,7 +35,7 @@ export class ClientHandler {
     }
 
 
-    joinSession(model, apiKey, appId, name, password, data) {
+    joinSession(model, apiKey, appId, name, password, data, futures, futureLoops) {
         return Croquet.Session.join({
             apiKey: apiKey,
             appId: appId,
@@ -42,7 +44,9 @@ export class ClientHandler {
             model: model,
             step: "manual",
             options: {
-                data: data
+                data: data,
+                futures: futures,
+                futureLoops: futureLoops
             },
             debug: "snapshot"
         })
@@ -57,75 +61,28 @@ export class ClientHandler {
             })
             this.logger.log("Session id = " + id)
             this.logger.log("Data = " + JSON.stringify(this.model.data))
+            this.model.$loaded = true
             this.socket.emit('ready', this.model.data)
         })
 
     }
 
-    onJoinMessage(apiKey, appId, name, password, data, subscriptions, futures, futuresLoop) {
+    onJoinMessage(apiKey, appId, name, password, data, subscriptions, futures, futureLoops) {
         if (typeof(subscriptions) == "string") {
             subscriptions = JSON.parse(subscriptions)
         }
         if (typeof(futures) == "string") {
             futures = JSON.parse(futures)
         }
-        if (typeof(futuresLoop) == "string") {
-            futuresLoop = JSON.parse(futuresLoop)
+        if (typeof(futureLoops) == "string") {
+            futureLoops = JSON.parse(futureLoops)
         }
         this.subscriptions = subscriptions
-        class CroquetAdapterModelWithFuture extends CroquetAdapterModel {
 
-            modelVersion = 0
-
-            init(options) {
-                super.init(options)
-                this.futures = futures
-                this.futuresLoop = futuresLoop
-                this.future(10).futureLoop()
-            }
-
-
-            consumeCPU(milliseconds = 1) {
-                // Consume cpu based on instructions without using Date.now
-                let start = performance.now()
-                while (performance.now() - start < milliseconds) {
-                    let a = 1 + 1
-                }
-            }
-
-            futureLoop() {
-                this.consumeCPU(2)
-                this.futures.forEach(future => {
-                    if (this.now() % future.time == 0) {
-                        this._sendFuture(future.id, future.time)
-                        this.futures.splice(this.futures.indexOf(future), 1)
-                    }
-                })
-                this.futuresLoop.forEach(future => {
-                    if (this.now() % future.time == 0) {
-                        this._sendFuture(future.id, future.time)
-                    }
-                })
-                this.future(10).futureLoop()
-            }
-
-
-            _sendFuture(id, time) {
-                this.modelVersion++;
-                this.sendFuture(id, time)
-            }
-
-            _sendFutureLoop(id, time) {
-                this.modelVersion++;
-                this.sendFutureLoop(id, time)
-            }
-
-        }
-        CroquetAdapterModelWithFuture.register("CroquetAdapterModelWithFuture")
         if (typeof(data) == "string") {
             data = JSON.parse(data)
         }
-        this.joinSession(CroquetAdapterModelWithFuture, apiKey, appId, name, password, data)
+        this.joinSession(CroquetAdapterModel, apiKey, appId, name, password, data, futures, futureLoops)
             .then(({ id, step, model, view, leave }) => {
                 this.onJoin(id, step, model, view, leave)
             })
@@ -161,9 +118,10 @@ export class ClientHandler {
     }
 
     onDisconnection() {
-        //this.model.unsubscribeAll()
+        this.model.terminate()
         this.view.detach()
         this.disconnectCallback()
+        delete this.model
     }
 
 
