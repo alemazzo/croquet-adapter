@@ -4,6 +4,9 @@ import pkg from 'fast-json-patch';
 import { Logger } from './logger.js';
 const { applyOperation } = pkg;
 
+/**
+ * The CroquetAdapterModel is a model that is used to communicate with the Croquet framework.
+ */
 export class CroquetAdapterModel extends Croquet.Model {
 
     /**
@@ -26,6 +29,17 @@ export class CroquetAdapterModel extends Croquet.Model {
      */
     $loaded = false
 
+    /**
+     * The interval in milliseconds of the future loop
+     */
+    $futureLoopMilliseconds = 10
+
+    /**
+     * The duration in milliseconds of the consume cpu 
+     * function every time the future loop is called
+     */
+    $cpuConsumeMilliseconds = 1
+
     init(options) {
         super.init(options)
 
@@ -35,13 +49,11 @@ export class CroquetAdapterModel extends Croquet.Model {
         this.futureLoops = options.futureLoops
 
         // Setup future loop
-        this.future(10).futureLoop()
+        this.future(this.$futureLoopMilliseconds).futureLoop()
 
         // Subscribe to events
         this.subscribe(CroquetAdapterConfig.eventsScope, CroquetAdapterConfig.eventsEvent, this.handleEvent)
 
-        // Subscribe to patches
-        this.subscribe(CroquetAdapterConfig.patchesScope, CroquetAdapterConfig.patchesEvent, this.handleRemotePatches);
     }
 
     /**
@@ -53,23 +65,17 @@ export class CroquetAdapterModel extends Croquet.Model {
     }
 
     /**
-     * Handle patches and update model data
-     * @param {*} patches 
+     * The future loop.
+     * Consume cpu and send futures to the client.
+     * Terminate if the terminate flag is set.
      */
-    handleRemotePatches(patches) {
-        patches.forEach(patch => {
-            this.data = applyOperation(this.data, patch).newDocument
-        });
-        this.$logger.log("Handle remote patches applied - Data = " + JSON.stringify(this.data))
-    }
-
     futureLoop() {
         if (this.$terminate) {
             this.destroy()
             return
         }
         if (this.$loaded) {
-            this.consumeCPU(2)
+            this.consumeCPU(this.$cpuConsumeMilliseconds)
         }
         this.futures.forEach(future => {
             if (this.now() % future.time == 0) {
@@ -82,12 +88,14 @@ export class CroquetAdapterModel extends Croquet.Model {
                 this.pushFutures(future.id, future.time)
             }
         })
-        this.future(10).futureLoop()
+        this.future(this.$futureLoopMilliseconds).futureLoop()
     }
 
-
-    consumeCPU(milliseconds = 1) {
-        // Consume cpu based on instructions without using Date.now
+    /**
+     * Consume cpu based on instructions without using Date.now
+     * @param {*} milliseconds The number of milliseconds to consume cpu
+     */
+    consumeCPU(milliseconds) {
         let start = performance.now()
         while (performance.now() - start < milliseconds) {
             let a = 1 + 1
@@ -100,21 +108,23 @@ export class CroquetAdapterModel extends Croquet.Model {
      * @param {*} time 
      */
     pushFutures(id) {
-        this.$logger.log("PUSHING FUTURE FOR ID = " + id)
         this.$futures.push(id)
     }
 
     /**
-     * Apply local patches to the model data
+     * Apply patches to the model data
      * @param {*} patches 
      */
-    applyLocalPatches(patches) {
+    updateData(patches) {
         patches.forEach(patch => {
             this.data = applyOperation(this.data, patch).newDocument
         });
-        this.$logger.log("Apply patches applied - Data = " + JSON.stringify(this.data))
+        this.$logger.log("Patches applied - Data = " + JSON.stringify(this.data))
     }
 
+    /**
+     * Set the terminate flag to true
+     */
     terminate() {
         this.$terminate = true
     }

@@ -1,11 +1,26 @@
 import * as Croquet from '@croquet/croquet'
-import { CroquetAdapterConfig } from "./config.js";
+import { CroquetAdapterConfig, CroquetSocketConfig } from "./config.js";
 import { Logger } from './logger.js';
 
+/**
+ * The CroquetAdapterView is a view that is used to communicate with the Croquet framework.
+ */
 export class CroquetAdapterView extends Croquet.View {
 
+    /**
+     * The logger for the adapter view
+     */
     logger = new Logger(this.constructor.name)
+
+    /**
+     * The subscriptions map
+     */
     subscriptions = {}
+
+    /**
+     * The interval in milliseconds of the future loop
+     */
+    $futureLoopMilliseconds = 10
 
     constructor(model, socket, onReady) {
         super(model)
@@ -18,18 +33,18 @@ export class CroquetAdapterView extends Croquet.View {
         // Listen for events redirect from Model
         this.subscribe(CroquetAdapterConfig.redirectEventsScope, CroquetAdapterConfig.redirectEventsEvent, this.handleEvent)
 
-        // List for future events
-        this.subscribe('future', 'command', this.handleFuture)
-
         // Start future loop
-        this.future(10).checkFutures()
+        this.future(this.$futureLoopMilliseconds).futureLoop()
     }
 
-    checkFutures() {
+    /**
+     * Redirect future command to client
+     */
+    futureLoop() {
         while (this.model.$futures.length > 0) {
-            this.handleFuture(this.model.$futures.shift())
+            this.socket.emit(CroquetSocketConfig.Server.future, this.model.$futures.shift())
         }
-        this.future(10).checkFutures()
+        this.future(this.$futureLoopMilliseconds).futureLoop()
     }
 
     /**
@@ -42,7 +57,6 @@ export class CroquetAdapterView extends Croquet.View {
         let event = data["event"]
         let content = data["content"]
         this.subscriptions[scope][event](content)
-
     }
 
     /**
@@ -51,7 +65,6 @@ export class CroquetAdapterView extends Croquet.View {
      */
     handleFuture(id) {
         this.logger.log("Emit " + id)
-        this.socket.emit('future', id)
     }
 
     /**
@@ -91,33 +104,5 @@ export class CroquetAdapterView extends Croquet.View {
         }
         super.publish(CroquetAdapterConfig.eventsScope, CroquetAdapterConfig.eventsEvent, packet)
     }
-
-    /**
-     * Publish a patch
-     * @param {*} patches 
-     */
-    publishPatches(patches) {
-        super.publish(CroquetAdapterConfig.patchesScope, CroquetAdapterConfig.patchesEvent, patches)
-    }
-
-
-
-    /*
-    _restore(index) {
-        this.socket.emit('future-restore', this.model.$prevFutures[index])
-    }
-    restore() {
-        var index = 0
-        this.socket.on('future-restore-ack', () => {
-            let nextIndex = index++;
-            if (nextIndex == this.model.$prevFutures.length) {
-                this.socket.emit('completed-restore')
-            } else {
-                this._restore(nextIndex)
-            }
-        })
-        this._restore(index)
-    }
-    */
 
 }
