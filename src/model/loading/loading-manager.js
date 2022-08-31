@@ -1,19 +1,21 @@
 import { Model } from "@croquet/croquet";
 import { Channels } from "../../config/channels.js";
-import { Future } from "../future/future.js";
-import { Event } from "../subscriptions/events.js";
+import { Logger } from "../../logger.js";
 
 export class LoadingManager extends Model {
+
+    $logger = Logger.getLogger("LoadingManager")
 
     $notifyLoaded = false
     $loaded = false
     $queue = []
 
     init(options) {
-        this.future(10).checkIfLoaded()
+        this.future(100).checkIfLoaded()
     }
 
     checkIfLoaded() {
+        // this.$logger.debug("Checking if loaded")
         if (this.$notifyLoaded) {
             let eventsChannel = Channels.Events.event
             let futureChannel = Channels.Future.tick
@@ -26,8 +28,11 @@ export class LoadingManager extends Model {
             })
             this.$queue = []
             this.$loaded = true
+            this.$logger.debug("Loaded")
+            let applicationReadyChannel = Channels.Events.applicationReady
+            this.publish(applicationReadyChannel.scope, applicationReadyChannel.event)
         } else {
-            this.future(10).checkIfLoaded()
+            this.future(100).checkIfLoaded()
         }
     }
 

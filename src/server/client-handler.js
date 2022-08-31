@@ -1,6 +1,5 @@
 import * as Croquet from '@croquet/croquet'
-import { CroquetSocketConfig } from './config.js'
-import { Logger } from "./logger.js"
+import { Logger } from "../logger.js"
 import { SocketMessages } from "../config/socket-messages.js"
 import { DynamicModel } from '../model/dynamic-model.js'
 import { DynamicView } from '../view/dynamic-view.js'
@@ -13,7 +12,7 @@ export class ClientHandler {
     /**
      * Logger
      */
-    logger = new Logger(this.constructor.name)
+    logger = Logger.getLogger("ClientHandler")
 
     constructor(socket, disconnectCallback) {
         this.socket = socket
@@ -70,8 +69,7 @@ export class ClientHandler {
                 futures: futures,
                 futureLoops: futureLoops,
                 subscriptions: subscriptions
-            },
-            debug: "snapshot"
+            }
         })
     }
 
@@ -81,8 +79,9 @@ export class ClientHandler {
      * @param {*} step 
      * @param {*} model 
      */
-    onJoin(step, model, leave) {
+    onJoin(id, step, model, leave) {
         setInterval(step, 100)
+        this.logger.info("Joined session " + id)
         this.leave = leave
         this.view = new DynamicView(model, this.socket)
     }
@@ -104,9 +103,9 @@ export class ClientHandler {
         futureLoops = typeof(futureLoops) == "string" ? JSON.parse(futureLoops) : futureLoops
         data = typeof(data) == "string" ? JSON.parse(data) : data
         this.joinSession(DynamicModel, apiKey, appId, name, password, data, subscriptions, futures, futureLoops)
-            .then(({ step, model, view, leave }) => {
+            .then(({ id, step, model, view, leave }) => {
                 view.detach()
-                this.onJoin(step, model, leave)
+                this.onJoin(id, step, model, leave)
             })
     }
 
@@ -119,6 +118,7 @@ export class ClientHandler {
     onPublishMessage(scope, event, data) {
         let eventObject = new Event(scope, event, data)
         this.view.publish(eventObject)
+        this.logger.debug("Published event " + eventObject.toString())
     }
 
     /**
@@ -130,6 +130,7 @@ export class ClientHandler {
     onLocalEventMessage(scope, event, data) {
         let eventObject = Event(scope, event, data)
         this.view.publishLocalEvent(eventObject)
+        this.logger.debug("Published local event " + eventObject.toString())
     }
 
     /**
@@ -139,6 +140,7 @@ export class ClientHandler {
     onUpdateModelMessage(patches) {
         patches = typeof(patches) == "string" ? JSON.parse(patches) : patches
         this.view.updateModel(patches)
+        this.logger.debug("Updated model with patches " + JSON.stringify(patches))
     }
 
     /**
@@ -150,6 +152,7 @@ export class ClientHandler {
             //this.model.terminate()
         this.leave()
         setTimeout(this.disconnectCallback, 100)
+        this.logger.info("Disconnected")
     }
 
 }

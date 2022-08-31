@@ -1,6 +1,9 @@
 import { Model } from "@croquet/croquet";
+import { Logger } from "../../logger.js";
 
 export class SnapshotManager extends Model {
+
+    $logger = Logger.getLogger("SnapshotManager")
 
     $defaultInterval = 10
     $defaultConsumeDuration = 1
@@ -8,6 +11,7 @@ export class SnapshotManager extends Model {
     init(options) {
         this.milliseconds = options.milliseconds || this.$defaultInterval
         this.future(this.milliseconds).consumeCpuLoop()
+        this.$logger.debug("Start consuming cpu with interval of " + this.milliseconds + " milliseconds")
     }
 
     consumeCpuLoop() {

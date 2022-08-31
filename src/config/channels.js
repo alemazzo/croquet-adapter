@@ -7,6 +7,7 @@ export class Channels {
     }
 
     static Events = {
+        applicationReady: new Channel("events", "application-ready"),
         event: new Channel("events", "event"),
         localEvent: new Channel("events", "localEvent")
     }

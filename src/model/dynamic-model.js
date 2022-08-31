@@ -1,4 +1,5 @@
 import { Model } from '@croquet/croquet'
+import { Logger } from '../logger.js'
 import { DataManager } from './data/data-manager.js'
 import { FutureManager } from './future/future-manager.js'
 import { LoadingManager } from './loading/loading-manager.js'
@@ -6,8 +7,9 @@ import { SnapshotManager } from './snapshot/snapshot-manager.js'
 import { SubscriptionManager } from './subscriptions/subscription-manager.js'
 
 
-
 export class DynamicModel extends Model {
+
+    $logger = Logger.getLogger("DynamicModel")
 
     init(options) {
         super.init(options)
@@ -25,6 +27,7 @@ export class DynamicModel extends Model {
             loadingManager: this.loadingManager
         })
         this.snapshotManager = SnapshotManager.create(options)
+        this.$logger.debug("Dynamic model initialized")
     }
 
     setLoaded() {

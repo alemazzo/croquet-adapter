@@ -1,6 +1,9 @@
 export class SocketMessages {
 
     static Server = {
+
+        applicationReady: "application-ready",
+
         modelEvent: 'model-event',
         modelFutureTick: 'model-future-tick',
         modelReady: 'model-ready',

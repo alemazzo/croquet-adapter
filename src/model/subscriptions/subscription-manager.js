@@ -1,8 +1,10 @@
 import { Model } from "@croquet/croquet";
 import { Channels } from "../../config/channels.js";
-import { Event } from "./events.js";
+import { Logger } from "../../logger.js";
 
 export class SubscriptionManager extends Model {
+
+    $logger = Logger.getLogger("SubscriptionManager")
 
     init(options) {
         super.init(options);
@@ -20,5 +22,7 @@ export class SubscriptionManager extends Model {
         } else {
             this.loadingManager.addEvent(event)
         }
+        this.$logger.debug(`Notified event: ${JSON.stringify(event)}`)
     }
+
 }

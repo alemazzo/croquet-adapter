@@ -1,8 +1,11 @@
 import { Model } from '@croquet/croquet'
 import { Channels } from '../../config/channels.js'
+import { Logger } from '../../logger.js'
 
 
 export class FutureManager extends Model {
+
+    $logger = Logger.getLogger("FutureManager")
 
     init(options) {
         super.init(options)
@@ -34,6 +37,7 @@ export class FutureManager extends Model {
         } else {
             this.loadingManager.addFuture(future)
         }
+        this.$logger.debug(`Notified future tick: ${JSON.stringify(future)} with time ${this.now()}`)
     }
 
 }
