@@ -1,1 +1,89 @@
-<mxfile host="app.diagrams.net" modified="2022-08-31T08:02:54.656Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.5112.102 Safari/537.36" version="20.1.1" etag="TpGLqlzjJLwiGF111URm" type="github"><diagram id="Znws80n49v_wvFhrRm50">UzV2zq1wL0osyPDNT0nNUTV2VTV2LsrPL4GwciucU3NyVI0MMlNUjV1UjYwMgFjVyA2HrCFY1qAgsSg1rwSLBiADYTaQg2Y1AA==</diagram></mxfile>
+<mxfile host="app.diagrams.net" modified="2022-08-31T08:08:40.687Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.5112.102 Safari/537.36" etag="rSHGsVeJnEOWB51udRAo" version="20.1.1" type="github">
+  <diagram id="Znws80n49v_wvFhrRm50" name="Page-1">
+    <mxGraphModel dx="1422" dy="758" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="-6zr8g8bWNjjjz_1pWaL-5" value="CroquetAdapterServer" style="verticalAlign=top;align=left;spacingTop=8;spacingLeft=2;spacingRight=12;shape=cube;size=10;direction=south;fontStyle=4;html=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="250" width="680" height="230" as="geometry" />
+        </mxCell>
+        <mxCell id="-6zr8g8bWNjjjz_1pWaL-14" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;startArrow=classic;startFill=1;" edge="1" parent="1" source="-6zr8g8bWNjjjz_1pWaL-1" target="-6zr8g8bWNjjjz_1pWaL-12">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="-6zr8g8bWNjjjz_1pWaL-1" value="«Javascript»&lt;br&gt;&lt;b&gt;CroquetAdapterInstance&lt;/b&gt;" style="html=1;dropTarget=0;" vertex="1" parent="1">
+          <mxGeometry x="120" y="370" width="170" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="-6zr8g8bWNjjjz_1pWaL-2" value="" style="shape=module;jettyWidth=8;jettyHeight=4;" vertex="1" parent="-6zr8g8bWNjjjz_1pWaL-1">
+          <mxGeometry x="1" width="20" height="20" relative="1" as="geometry">
+            <mxPoint x="-27" y="7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="-6zr8g8bWNjjjz_1pWaL-6" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;startArrow=classic;startFill=1;" edge="1" parent="1" source="-6zr8g8bWNjjjz_1pWaL-3" target="-6zr8g8bWNjjjz_1pWaL-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="-6zr8g8bWNjjjz_1pWaL-3" value="«Java»&lt;br&gt;&lt;b&gt;CroquetAdapterClient&lt;/b&gt;" style="html=1;dropTarget=0;" vertex="1" parent="1">
+          <mxGeometry x="120" y="570" width="170" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="-6zr8g8bWNjjjz_1pWaL-4" value="" style="shape=module;jettyWidth=8;jettyHeight=4;" vertex="1" parent="-6zr8g8bWNjjjz_1pWaL-3">
+          <mxGeometry x="1" width="20" height="20" relative="1" as="geometry">
+            <mxPoint x="-27" y="7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="-6zr8g8bWNjjjz_1pWaL-15" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;startArrow=classic;startFill=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="-6zr8g8bWNjjjz_1pWaL-7" target="-6zr8g8bWNjjjz_1pWaL-12">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="400" y="190" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="-6zr8g8bWNjjjz_1pWaL-7" value="«Javascript»&lt;br&gt;&lt;b&gt;CroquetAdapterInstance&lt;/b&gt;" style="html=1;dropTarget=0;" vertex="1" parent="1">
+          <mxGeometry x="540" y="370" width="170" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="-6zr8g8bWNjjjz_1pWaL-8" value="" style="shape=module;jettyWidth=8;jettyHeight=4;" vertex="1" parent="-6zr8g8bWNjjjz_1pWaL-7">
+          <mxGeometry x="1" width="20" height="20" relative="1" as="geometry">
+            <mxPoint x="-27" y="7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="-6zr8g8bWNjjjz_1pWaL-11" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;startArrow=classic;startFill=1;" edge="1" parent="1" source="-6zr8g8bWNjjjz_1pWaL-9" target="-6zr8g8bWNjjjz_1pWaL-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="-6zr8g8bWNjjjz_1pWaL-9" value="«Java»&lt;br&gt;&lt;b&gt;CroquetAdapterClient&lt;/b&gt;" style="html=1;dropTarget=0;" vertex="1" parent="1">
+          <mxGeometry x="540" y="570" width="170" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="-6zr8g8bWNjjjz_1pWaL-10" value="" style="shape=module;jettyWidth=8;jettyHeight=4;" vertex="1" parent="-6zr8g8bWNjjjz_1pWaL-9">
+          <mxGeometry x="1" width="20" height="20" relative="1" as="geometry">
+            <mxPoint x="-27" y="7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="-6zr8g8bWNjjjz_1pWaL-12" value="«Replicators»&lt;br&gt;&lt;b&gt;Croquet&lt;/b&gt;" style="html=1;dropTarget=0;" vertex="1" parent="1">
+          <mxGeometry x="329" y="100" width="170" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="-6zr8g8bWNjjjz_1pWaL-13" value="" style="shape=module;jettyWidth=8;jettyHeight=4;" vertex="1" parent="-6zr8g8bWNjjjz_1pWaL-12">
+          <mxGeometry x="1" width="20" height="20" relative="1" as="geometry">
+            <mxPoint x="-27" y="7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="-6zr8g8bWNjjjz_1pWaL-21" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;startArrow=classic;startFill=1;" edge="1" parent="1" source="-6zr8g8bWNjjjz_1pWaL-16" target="-6zr8g8bWNjjjz_1pWaL-12">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="-6zr8g8bWNjjjz_1pWaL-16" value="«Javascript»&lt;br&gt;&lt;b&gt;CroquetAdapterInstance&lt;/b&gt;" style="html=1;dropTarget=0;" vertex="1" parent="1">
+          <mxGeometry x="330" y="370" width="170" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="-6zr8g8bWNjjjz_1pWaL-17" value="" style="shape=module;jettyWidth=8;jettyHeight=4;" vertex="1" parent="-6zr8g8bWNjjjz_1pWaL-16">
+          <mxGeometry x="1" width="20" height="20" relative="1" as="geometry">
+            <mxPoint x="-27" y="7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="-6zr8g8bWNjjjz_1pWaL-20" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;startArrow=classic;startFill=1;" edge="1" parent="1" source="-6zr8g8bWNjjjz_1pWaL-18" target="-6zr8g8bWNjjjz_1pWaL-16">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="-6zr8g8bWNjjjz_1pWaL-18" value="«Java»&lt;br&gt;&lt;b&gt;CroquetAdapterClient&lt;/b&gt;" style="html=1;dropTarget=0;" vertex="1" parent="1">
+          <mxGeometry x="328.5" y="570" width="171.5" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="-6zr8g8bWNjjjz_1pWaL-19" value="" style="shape=module;jettyWidth=8;jettyHeight=4;" vertex="1" parent="-6zr8g8bWNjjjz_1pWaL-18">
+          <mxGeometry x="1" width="20" height="20" relative="1" as="geometry">
+            <mxPoint x="-27" y="7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
