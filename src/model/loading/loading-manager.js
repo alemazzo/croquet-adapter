@@ -11,12 +11,13 @@ export class LoadingManager extends Model {
     $queue = []
 
     init(options) {
-        this.future(100).checkIfLoaded()
+        this.snapshotManager = options.snapshotManager
+        this.future(500).checkIfLoaded()
+        this.$logger.debug("LoadingManager initialized")
     }
 
     checkIfLoaded() {
-        // this.$logger.debug("Checking if loaded")
-        if (this.$notifyLoaded) {
+        if (this.$notifyLoaded && !this.$loaded) {
             let eventsChannel = Channels.Events.event
             let futureChannel = Channels.Future.tick
             this.$queue.forEach((item) => {
@@ -28,12 +29,12 @@ export class LoadingManager extends Model {
             })
             this.$queue = []
             this.$loaded = true
+            this.snapshotManager.start()
             this.$logger.debug("Loaded")
             let applicationReadyChannel = Channels.Events.applicationReady
             this.publish(applicationReadyChannel.scope, applicationReadyChannel.event)
-        } else {
-            this.future(100).checkIfLoaded()
         }
+        this.future(500).checkIfLoaded()
     }
 
     addFuture(future) {

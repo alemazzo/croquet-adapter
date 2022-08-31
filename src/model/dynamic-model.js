@@ -11,27 +11,45 @@ export class DynamicModel extends Model {
 
     $logger = Logger.getLogger("DynamicModel")
 
+    $toBeTerminated = false
+
     init(options) {
         super.init(options)
-        this.dataManager = DataManager.create({
-            data: options.data,
+        this.dataManager = DataManager.create(options)
+        this.snapshotManager = SnapshotManager.create(options)
+        this.loadingManager = LoadingManager.create({
+            snapshotManager: this.snapshotManager,
         })
-        this.loadingManager = LoadingManager.create()
         this.subscriptionsManager = SubscriptionManager.create({
-            subscriptions: options.subscriptions || [],
+            subscriptions: options.subscriptions,
             loadingManager: this.loadingManager
         })
         this.futureManager = FutureManager.create({
-            futures: options.futures || [],
-            futureLoops: options.futureLoops || [],
+            futures: options.futures,
+            futureLoops: options.futureLoops,
             loadingManager: this.loadingManager
         })
-        this.snapshotManager = SnapshotManager.create(options)
+        this.future(100).checkTermination()
         this.$logger.debug("Dynamic model initialized")
+    }
+
+    checkTermination() {
+        if (this.$toBeTerminated) {
+            this.dataManager.destroy()
+            this.loadingManager.destroy()
+            this.subscriptionsManager.destroy()
+            this.futureManager.destroy()
+            this.snapshotManager.destroy()
+            this.destroy()
+        }
+        this.future(100).checkTermination()
     }
 
     setLoaded() {
         this.loadingManager.setLoaded()
     }
 
+    terminate() {
+        this.$toBeTerminated = true
+    }
 }

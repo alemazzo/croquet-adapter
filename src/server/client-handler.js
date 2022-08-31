@@ -69,7 +69,18 @@ export class ClientHandler {
                 futures: futures,
                 futureLoops: futureLoops,
                 subscriptions: subscriptions
-            }
+            },
+            debug: [
+                //"session",
+                //"messages",
+                //"sends",
+                //"snapshot",
+                //"data",
+                //"hashing",
+                //"subscribe",
+                //"classes",
+                //"ticks"
+            ]
         })
     }
 
@@ -80,9 +91,10 @@ export class ClientHandler {
      * @param {*} model 
      */
     onJoin(id, step, model, leave) {
-        setInterval(step, 100)
+        setInterval(step, 10)
         this.logger.info("Joined session " + id)
         this.leave = leave
+        this.model = model
         this.view = new DynamicView(model, this.socket)
     }
 
@@ -118,7 +130,7 @@ export class ClientHandler {
     onPublishMessage(scope, event, data) {
         let eventObject = new Event(scope, event, data)
         this.view.publish(eventObject)
-        this.logger.debug("Published event " + eventObject.toString())
+            //this.logger.debug("Published event " + eventObject.toString())
     }
 
     /**
@@ -130,7 +142,7 @@ export class ClientHandler {
     onLocalEventMessage(scope, event, data) {
         let eventObject = Event(scope, event, data)
         this.view.publishLocalEvent(eventObject)
-        this.logger.debug("Published local event " + eventObject.toString())
+            //this.logger.debug("Published local event " + eventObject.toString())
     }
 
     /**
@@ -140,16 +152,15 @@ export class ClientHandler {
     onUpdateModelMessage(patches) {
         patches = typeof(patches) == "string" ? JSON.parse(patches) : patches
         this.view.updateModel(patches)
-        this.logger.debug("Updated model with patches " + JSON.stringify(patches))
+            //this.logger.debug("Updated model with patches " + JSON.stringify(patches))
     }
 
     /**
      * Handle the disconnection of the socket
      */
     onDisconnection() {
-        this.view.detach()
-            //this.model.unsubscribeAll()
-            //this.model.terminate()
+        // this.view.detach()
+        this.model.terminate()
         this.leave()
         setTimeout(this.disconnectCallback, 100)
         this.logger.info("Disconnected")

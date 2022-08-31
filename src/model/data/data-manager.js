@@ -10,6 +10,7 @@ export class DataManager extends Model {
 
     init(options) {
         this.data = options.data
+        this.$logger.debug("DataManager initialized")
     }
 
     update(patches) {

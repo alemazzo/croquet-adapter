@@ -8,15 +8,25 @@ export class SnapshotManager extends Model {
     $defaultInterval = 10
     $defaultConsumeDuration = 1
 
+    $started = false
+
     init(options) {
-        this.milliseconds = options.milliseconds || this.$defaultInterval
-        this.future(this.milliseconds).consumeCpuLoop()
-        this.$logger.debug("Start consuming cpu with interval of " + this.milliseconds + " milliseconds")
+        this.cpuConsumeInterval = options.cpuConsumeInterval || this.$defaultInterval
+        this.cpuConsumeDuration = options.cpuConsumeDuration || this.$defaultConsumeDuration
+        this.future(this.cpuConsumeInterval).consumeCpuLoop()
+        this.$logger.debug("SnapshotManager initialized")
+    }
+
+    start() {
+        this.$started = true
+        this.$logger.debug("Start consuming cpu with interval of " + this.cpuConsumeInterval + " milliseconds and duration of " + this.cpuConsumeDuration + " milliseconds")
     }
 
     consumeCpuLoop() {
-        this.consumeCPU(this.$defaultConsumeDuration)
-        this.future(this.milliseconds).consumeCpuLoop()
+        if (this.$started) {
+            this.consumeCPU(this.cpuConsumeDuration)
+        }
+        this.future(this.cpuConsumeInterval).consumeCpuLoop()
     }
 
     /**

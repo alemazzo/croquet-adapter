@@ -19,6 +19,7 @@ export class FutureManager extends Model {
         this.futureLoops.forEach((future) => {
             this.future(future.time).handleFutureLoop(future)
         })
+        this.$logger.debug("FutureManager initialized")
     }
 
     handleFuture(future) {
@@ -33,11 +34,13 @@ export class FutureManager extends Model {
     notifyFutureTick(future) {
         let channel = Channels.Future.tick
         if (this.loadingManager.$loaded) {
+            this.$logger.debug(`Notified future tick: ${JSON.stringify(future)}`)
             this.publish(channel.scope, channel.event, future)
         } else {
+            this.$logger.debug(`Added future tick to loading manager: ${JSON.stringify(future)}`)
             this.loadingManager.addFuture(future)
         }
-        this.$logger.debug(`Notified future tick: ${JSON.stringify(future)} with time ${this.now()}`)
+
     }
 
 }

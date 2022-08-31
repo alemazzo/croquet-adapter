@@ -1,6 +1,6 @@
 export class Logger {
 
-    static options = ["info"]
+    static options = ["info", "debug"]
     static logger = []
 
     static setOptions(options) {

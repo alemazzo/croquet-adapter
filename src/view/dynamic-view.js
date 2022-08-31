@@ -28,6 +28,7 @@ export class DynamicView extends View {
         this.socket.emit(readyMessage, this.model.dataManager.data);
 
         this.model.setLoaded()
+        this.$logger.debug("DynamicView initialized")
     }
 
     onApplicationReady() {
