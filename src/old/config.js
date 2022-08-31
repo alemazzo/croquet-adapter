@@ -27,10 +27,13 @@ export class CroquetSocketConfig {
      */
     static Client = {
         join: 'join',
-        subscribe: 'subscribe',
-        unsubscribe: 'unsubscribe',
-        publish: 'publish',
-        updateModel: 'update-model',
+        modelSubscribe: 'model-subscribe',
+        viewSubscribe: 'view-subscribe',
+        modelUnsubscribe: 'model-unsubscribe',
+        viewUnsubscribe: 'view-unsubscribe',
+        modelPublish: 'model-publish',
+        viewPublish: 'view-publish',
+        modelUpdate: 'update-model',
         disconnect: 'disconnect'
     }
 
@@ -38,9 +41,11 @@ export class CroquetSocketConfig {
      * Message types sent by the server to the client
      */
     static Server = {
-        ready: 'ready',
-        event: 'event',
-        future: 'future'
+        modelFutureTick: 'model-future-tick',
+        viewFutureTick: 'view-future-tick',
+        modelEventReceived: 'model-event-received',
+        viewEventReceived: 'view-event-received',
+        ready: 'ready'
     }
 
 }

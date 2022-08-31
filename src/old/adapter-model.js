@@ -45,6 +45,7 @@ export class CroquetAdapterModel extends Croquet.Model {
 
         // Setup data
         this.data = options.data
+        this.subscriptions = options.subscriptions
         this.futures = options.futures
         this.futureLoops = options.futureLoops
 
@@ -55,6 +56,7 @@ export class CroquetAdapterModel extends Croquet.Model {
         this.subscribe(CroquetAdapterConfig.eventsScope, CroquetAdapterConfig.eventsEvent, this.handleEvent)
 
     }
+
 
     /**
      * Handle events and redirect to view
@@ -108,6 +110,7 @@ export class CroquetAdapterModel extends Croquet.Model {
      * @param {*} time 
      */
     pushFutures(id) {
+        //this.$logger.log("Pushing future - Id = " + id)
         this.$futures.push(id)
     }
 
@@ -119,7 +122,7 @@ export class CroquetAdapterModel extends Croquet.Model {
         patches.forEach(patch => {
             this.data = applyOperation(this.data, patch).newDocument
         });
-        this.$logger.log("Patches applied - Data = " + JSON.stringify(this.data))
+        //this.$logger.log("Patches applied - Data = " + JSON.stringify(this.data))
     }
 
     /**

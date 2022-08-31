@@ -22,13 +22,10 @@ export class CroquetAdapterView extends Croquet.View {
      */
     $futureLoopMilliseconds = 10
 
-    constructor(model, socket, onReady) {
+    constructor(model, socket) {
         super(model)
         this.model = model
         this.socket = socket
-
-        // Notify Ready
-        onReady()
 
         // Listen for events redirect from Model
         this.subscribe(CroquetAdapterConfig.redirectEventsScope, CroquetAdapterConfig.redirectEventsEvent, this.handleEvent)
@@ -42,7 +39,7 @@ export class CroquetAdapterView extends Croquet.View {
      */
     futureLoop() {
         while (this.model.$futures.length > 0) {
-            this.socket.emit(CroquetSocketConfig.Server.future, this.model.$futures.shift())
+            this.socket.emit(CroquetSocketConfig.Server.modelFutureTick, this.model.$futures.shift())
         }
         this.future(this.$futureLoopMilliseconds).futureLoop()
     }
