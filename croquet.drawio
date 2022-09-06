@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-09-06T13:05:18.845Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.5112.102 Safari/537.36" etag="ZZV5m_cAq3P0kiDGJde1" version="20.1.1" type="github" pages="3">
+<mxfile host="app.diagrams.net" modified="2022-09-06T13:08:38.036Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.5112.102 Safari/537.36" etag="Fwi2G_EIlPNK3uaixpz4" version="20.1.1" type="github" pages="3">
   <diagram id="Znws80n49v_wvFhrRm50" name="General View">
     <mxGraphModel dx="1422" dy="758" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -326,7 +326,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="3DPHAATxGLd3HZroyu5x" name="Proxy">
-    <mxGraphModel dx="981" dy="523" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1422" dy="758" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -408,52 +408,58 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="puDf70v0f_aZxbCuji06-1" value="Java Client" style="shape=module;align=left;spacingLeft=20;align=center;verticalAlign=top;" vertex="1" parent="1">
-          <mxGeometry x="99" y="930" width="181" height="190" as="geometry" />
+          <mxGeometry x="97" y="960" width="181" height="190" as="geometry" />
         </mxCell>
         <mxCell id="puDf70v0f_aZxbCuji06-2" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i&gt;&amp;lt;&amp;lt;Java&amp;gt;&amp;gt;&lt;/i&gt;&lt;br&gt;&lt;b&gt;CroquetClient&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;br&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;" vertex="1" parent="1">
-          <mxGeometry x="129" y="980" width="125" height="40" as="geometry" />
+          <mxGeometry x="127" y="1010" width="125" height="40" as="geometry" />
         </mxCell>
         <mxCell id="puDf70v0f_aZxbCuji06-3" value="use" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;startArrow=none;startFill=0;endArrow=none;endFill=0;startSize=15;endSize=13;" edge="1" parent="1" source="puDf70v0f_aZxbCuji06-4" target="puDf70v0f_aZxbCuji06-2">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="puDf70v0f_aZxbCuji06-4" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i&gt;&amp;lt;&amp;lt;Java&amp;gt;&amp;gt;&lt;/i&gt;&lt;br&gt;&lt;b&gt;View&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;br&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;" vertex="1" parent="1">
-          <mxGeometry x="129" y="1060" width="125" height="40" as="geometry" />
+          <mxGeometry x="127" y="1090" width="125" height="40" as="geometry" />
         </mxCell>
         <mxCell id="puDf70v0f_aZxbCuji06-11" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;dashed=1;startArrow=none;startFill=0;endArrow=none;endFill=0;startSize=15;endSize=13;" edge="1" parent="1" source="puDf70v0f_aZxbCuji06-5" target="puDf70v0f_aZxbCuji06-1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="puDf70v0f_aZxbCuji06-5" value="Model" style="shape=module;align=left;spacingLeft=20;align=center;verticalAlign=top;dashed=1;" vertex="1" parent="1">
-          <mxGeometry x="340.5" y="810" width="100" height="50" as="geometry" />
+          <mxGeometry x="363.5" y="850" width="100" height="50" as="geometry" />
         </mxCell>
         <mxCell id="puDf70v0f_aZxbCuji06-16" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;dashed=1;startArrow=none;startFill=0;endArrow=none;endFill=0;startSize=15;endSize=13;" edge="1" parent="1" source="puDf70v0f_aZxbCuji06-12" target="puDf70v0f_aZxbCuji06-5">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="puDf70v0f_aZxbCuji06-12" value="Java Client" style="shape=module;align=left;spacingLeft=20;align=center;verticalAlign=top;" vertex="1" parent="1">
-          <mxGeometry x="300" y="930" width="181" height="190" as="geometry" />
+          <mxGeometry x="323" y="960" width="181" height="190" as="geometry" />
         </mxCell>
         <mxCell id="puDf70v0f_aZxbCuji06-13" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i&gt;&amp;lt;&amp;lt;Java&amp;gt;&amp;gt;&lt;/i&gt;&lt;br&gt;&lt;b&gt;CroquetClient&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;br&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;" vertex="1" parent="1">
-          <mxGeometry x="336.5" y="980" width="125" height="40" as="geometry" />
+          <mxGeometry x="359.5" y="1010" width="125" height="40" as="geometry" />
         </mxCell>
         <mxCell id="puDf70v0f_aZxbCuji06-14" value="use" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;startArrow=none;startFill=0;endArrow=none;endFill=0;startSize=15;endSize=13;" edge="1" parent="1" source="puDf70v0f_aZxbCuji06-15" target="puDf70v0f_aZxbCuji06-13">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="puDf70v0f_aZxbCuji06-15" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i&gt;&amp;lt;&amp;lt;Java&amp;gt;&amp;gt;&lt;/i&gt;&lt;br&gt;&lt;b&gt;View&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;br&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;" vertex="1" parent="1">
-          <mxGeometry x="336.5" y="1060" width="125" height="40" as="geometry" />
+          <mxGeometry x="359.5" y="1090" width="125" height="40" as="geometry" />
         </mxCell>
         <mxCell id="puDf70v0f_aZxbCuji06-21" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;dashed=1;startArrow=none;startFill=0;endArrow=none;endFill=0;startSize=15;endSize=13;" edge="1" parent="1" source="puDf70v0f_aZxbCuji06-17" target="puDf70v0f_aZxbCuji06-5">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="puDf70v0f_aZxbCuji06-17" value="Java Client" style="shape=module;align=left;spacingLeft=20;align=center;verticalAlign=top;" vertex="1" parent="1">
-          <mxGeometry x="498.5" y="930" width="181" height="190" as="geometry" />
+          <mxGeometry x="550" y="960" width="181" height="190" as="geometry" />
         </mxCell>
         <mxCell id="puDf70v0f_aZxbCuji06-18" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i&gt;&amp;lt;&amp;lt;Java&amp;gt;&amp;gt;&lt;/i&gt;&lt;br&gt;&lt;b&gt;CroquetClient&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;br&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;" vertex="1" parent="1">
-          <mxGeometry x="526.5" y="980" width="125" height="40" as="geometry" />
+          <mxGeometry x="578" y="1010" width="125" height="40" as="geometry" />
         </mxCell>
         <mxCell id="puDf70v0f_aZxbCuji06-19" value="use" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;startArrow=none;startFill=0;endArrow=none;endFill=0;startSize=15;endSize=13;" edge="1" parent="1" source="puDf70v0f_aZxbCuji06-20" target="puDf70v0f_aZxbCuji06-18">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="puDf70v0f_aZxbCuji06-20" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i&gt;&amp;lt;&amp;lt;Java&amp;gt;&amp;gt;&lt;/i&gt;&lt;br&gt;&lt;b&gt;View&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;br&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;" vertex="1" parent="1">
-          <mxGeometry x="526.5" y="1060" width="125" height="40" as="geometry" />
+          <mxGeometry x="578" y="1090" width="125" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="puDf70v0f_aZxbCuji06-22" value="How it works" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=32;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="304" y="30" width="220" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="puDf70v0f_aZxbCuji06-24" value="How it looks like" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=32;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="279" y="780" width="270" height="50" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
